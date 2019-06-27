@@ -3,8 +3,8 @@
 {% block content %}
 <article>
     <header class="bg-gold athelas">
-        <div class="mv0 db tr"><a class="underline black link dim pa3" href="google.com">Sign In</a><a
-                class="underline black link dim pa3" href=" google.com">Register</a>
+        <div class="pv3 mv0 db tr"><a class="underline black link dim pa3" href="{% url 'auth_login' %}">Sign In</a><a
+                class="underline black link dim pa3" href="{% url 'registration_register' %}">Register</a>
         </div>
         <div class="mw9 center pa4 pt5-ns ph7-l">
             <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">

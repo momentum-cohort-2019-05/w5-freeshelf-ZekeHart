@@ -26,4 +26,5 @@ urlpatterns = [
     path('books/', views.BookListView.as_view(), name='books'),
     path('admin/', admin.site.urls),
     path('books/<slug>', views.BookDetailView.as_view(), name='book-detail'),
+    path('accounts/', include('registration.backends.simple.urls')),
 ]

@@ -13,9 +13,14 @@ class Book(models.Model):
     date_added = models.DateField(auto_now_add=True)
 
     image_url = models.URLField(null=True)
+    category = models.ManyToManyField('Category')
 
     def __str__(self):
         return self.title
 
-    # def get_absolute_url(self):
-    #     return reverse('books', args=[str(slugify(self.title))])
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
