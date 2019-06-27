@@ -1,1 +1,1 @@
-web: gunicorn /Users/zeke/Documents/MomentumAssignments/w5-freeshelf-ZekeHart.wsgi
+web: gunicorn ~/Documents/MomentumAssignments/w5-freeshelf-ZekeHart.wsgi
