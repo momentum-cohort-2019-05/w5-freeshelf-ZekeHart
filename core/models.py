@@ -18,6 +18,8 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ['date_added']
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
