@@ -1,39 +1,58 @@
 {% extends "base.html" %}
 
 {% block content %}
-{% if sorted_books %}
-<div class="mw7 center athelas">
-    <h1>Book List</h1>
-    <p>Books sorted by:
-        {% for sort_type in valid_sorts %}
-        {% if sort == sort_type %}
-        <strong>{{ sort_type }}</strong>
-        {% else %}
-        <a href="?sort={{ sort_type }}">{{ sort_type }}</a>
-        {% endif %}
-        {% endfor %}
-    </p>
-
-    <ul class="list pl0">
-        {% for book in sorted_books %}
-        <li class="bt bb b--black-10">
-            <a class="db pv4 ph3 ph0-l no-underline black bg-animate hover-bg-light-gray" href="{{ book.slug }}">
-                <div class="flex flex-column flex-row-ns">
-                    <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
-                        <img src="{{book.image_url}}" class="db">
+<article>
+    <header class="bg-gold athelas">
+        <div class="pv3 mv0 db tr"><a class="underline black link dim pa3" href="{% url 'auth_login' %}">Sign In</a><a
+                class="underline black link dim pa3" href="{% url 'registration_register' %}">Register</a>
+        </div>
+        <div class="mw9 center pa4 pt5-ns ph7-l">
+            <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
+                <span class="lh-copy white pa1 tracked-tight">
+                    Freeshelf
+                </span>
+            </h3>
+            <h4 class="f3 fw1 i">A collection of free programming ebooks</h4>
+        </div>
+    </header>
+    {% if sorted_books %}
+    <div class="mw7 center athelas">
+        <div class="">
+            <h1 class="f1">Book List</h1>
+            <p>Books sorted by:
+                {% for sort_type in valid_sorts %}
+                {% if sort == sort_type %}
+                <strong>{{ sort_type }}</strong>
+                {% else %}
+                <a href="?sort={{ sort_type }}">{{ sort_type }}</a>
+                {% endif %}
+                {% endfor %}
+            </p>
+        </div>
+        <ul class="list pl0">
+            {% for book in sorted_books %}
+            <li class="bt bb b--black-10">
+                <a class="db pv4 ph3 ph0-l no-underline black bg-animate hover-bg-light-gray" href="{{ book.slug }}">
+                    <div class="flex flex-column flex-row-ns">
+                        <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
+                            <img src="{{book.image_url}}" class="db pa3">
+                        </div>
+                        <div class="w-100 w-60-ns pl2-ns">
+                            <h1>{{ book.title }}</h1>
+                            <h3>{{book.author}}</h3>
+                            <p>{{book.description}}</p>
+                            <strong>Categories: </strong>
+                            {% for type in book.category.all %}
+                            <p>{{ type }}</p>
+                            {% endfor %}
+                        </div>
                     </div>
-                    <div class="w-100 w-60-ns pl2-ns">
-                        <h1>{{ book.title }}</h1>
-                        <h3>{{book.author}}</h3>
-                        <p>{{book.description}}</p>
-                    </div>
-                </div>
-            </a>
-        </li>
-        {% endfor %}
-    </ul>
-</div>
-{% else %}
-<p>There aren't any ebooks listed yet. Check back soon!</p>
-{% endif %}
-{% endblock %}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% else %}
+    <p>There aren't any ebooks listed yet. Check back soon!</p>
+    {% endif %}
+    {% endblock %}
