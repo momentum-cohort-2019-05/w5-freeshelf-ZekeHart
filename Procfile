@@ -1,1 +1,1 @@
-web: gunicorn <project_dir>.wsgi
+web: gunicorn /Users/zeke/Documents/MomentumAssignments/w5-freeshelf-ZekeHart.wsgi
