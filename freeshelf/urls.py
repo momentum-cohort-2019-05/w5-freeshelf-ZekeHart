@@ -22,6 +22,7 @@ from core import views
 
 urlpatterns = [
     path('', RedirectView.as_view(url='/freeshelf/')),
+    path('freeshelf/', views.freeshelf, name='freeshelf'),
     path('books/', views.BookListView.as_view(), name='books'),
     path('admin/', admin.site.urls),
     path('books/<slug>', views.BookDetailView.as_view(), name='book-detail'),
