@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if book_list %}
+<div class="mw7 center athelas">
+    <h1>Book List</h1>
+    <ul class="list pl0">
+        {% for book in book_list %}
+        <li class="bt bb b--black-10">
+            <a class="db pv4 ph3 ph0-l no-underline black bg-animate hover-bg-light-gray" href="{{ book.slug }}">
+                <div class="flex flex-column flex-row-ns">
+                    <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
+                        <img src="{{book.image_url}}" class="db">
+                    </div>
+                    <div class="w-100 w-60-ns pl2-ns">
+                        <h1>{{ book.title }}</h1>
+                        <h3>{{book.author}}</h3>
+                        <p>{{book.description}}</p>
+                    </div>
+                </div>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+<p>There aren't any ebooks listed yet. Check back soon!</p>
+{% endif %}
+{% endblock %}
