@@ -45,6 +45,7 @@
                             {% for type in book.category.all %}
                             <p>{{ type }}</p>
                             {% endfor %}
+                            <h4>Added to the shelf on: {{book.date_added}}</h4>
                         </div>
                     </div>
                 </a>
