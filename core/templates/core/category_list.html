@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% if category_list %}
+<div class="mw7 center athelas">
+    <h1>Category List</h1>
+    <ul class="list pl0">
+        {% for category in category_list %}
+        <li class="bt bb b--black-10">
+            <div class="flex flex-column flex-row-ns">
+                <div class="w-100 w-60-ns pl2-ns">
+                    <h3><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></h3>
+                </div>
+            </div>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% else %}
+<p>There aren't any categories listed yet. Check back soon!</p>
+{% endif %}
+{% endblock %}

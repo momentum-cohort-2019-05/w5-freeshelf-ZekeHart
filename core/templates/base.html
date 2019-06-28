@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    {% block title %}<title>Code Books</title>{% endblock %}
+    <!-- {% block title %}<title>Code Books</title>{% endblock %} -->
     {% block meta %}{% endblock %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,8 +12,27 @@
 </head>
 
 <body>
+    <header class="bg-gold athelas">
+        <div class="pv2 mv0 db tr">{% if request.user.is_authenticated %}
+            Logged in as {{ request.user }} | <a class="underline black link dim pa3"
+                href="{% url 'auth_logout' %}">Logout</a>
+            {% else %}
+            <a class="underline black link dim pa3" href="{% url 'auth_login' %}">Sign In</a>
+            <a class="underline black link dim pa3" href="{% url 'registration_register' %}">Register</a>
+            {% endif %}
+        </div>
+        <div class="pa1 pt1-ns ph7-l">
+            <h3 class="f1 f1-m f-headline-l measure-narrow lh-title mv0">
+                <a href="/all-books" an class="lh-copy white tracked-tight no-underline">
+                    Freeshelf
+                </a>
+            </h3>
+        </div>
+    </header>
     <main>
-        {% block content %}{% endblock %}
+        <div class="mw9 center pa4 pt2-ns ph7-l athelas">
+            {% block content %}{% endblock %}
+        </div>
     </main>
 </body>
 

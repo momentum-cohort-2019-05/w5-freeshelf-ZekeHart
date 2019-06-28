@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
-from core.models import Book
+from core.models import Book, Category
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -26,9 +27,26 @@ def all_books(request):
     })
 
 
-class BookDetailView(generic.DetailView):
-    model = Book
+@login_required
+def favorites_list(request):
+    return render(request, 'favorites_list.html', {})
 
 
-class BookListView(generic.ListView):
-    model = Book
+def specific_book(request, slug):
+    book = get_object_or_404(Book, slug=slug)
+    return render(request, 'core/specific_book.html', {'book': book})
+
+
+class CategoryListView(generic.ListView):
+    model = Category
+
+
+class CategoryDetailView(generic.DetailView):
+    model = Category
+
+
+# class BookDetailView(generic.DetailView):
+#     model = Book
+
+# class BookListView(generic.ListView):
+#     model = Book

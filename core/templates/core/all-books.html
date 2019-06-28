@@ -1,59 +1,79 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block content %}
-<article>
-    <header class="bg-gold athelas">
-        <div class="pv3 mv0 db tr"><a class="underline black link dim pa3" href="{% url 'auth_login' %}">Sign In</a><a
-                class="underline black link dim pa3" href="{% url 'registration_register' %}">Register</a>
-        </div>
-        <div class="mw9 center pa4 pt5-ns ph7-l">
-            <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
-                <span class="lh-copy white pa1 tracked-tight">
-                    Freeshelf
-                </span>
-            </h3>
-            <h4 class="f3 fw1 i">A collection of free programming ebooks</h4>
-        </div>
-    </header>
-    {% if sorted_books %}
-    <div class="mw9 center pa4 pt2-ns ph7-l athelas">
-        <div class="">
-            <h1 class="f1">Book List</h1>
-            <p>Books sorted by:
-                {% for sort_type in valid_sorts %}
-                {% if sort == sort_type %}
-                <strong>{{ sort_type }}</strong>
+<head>
+    {% block title %}<title>Code Books</title>{% endblock %}
+    {% block meta %}{% endblock %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/tachyons@4.10.0/css/tachyons.min.css" />
+    {% load static%}
+</head>
+
+<body>
+    <article>
+        <header class="bg-gold athelas">
+            <div class="pv3 mv0 db tr">
+                {% if request.user.is_authenticated %}
+                Logged in as {{ request.user }} | <a class="underline black link dim pa3"
+                    href="{% url 'auth_logout' %}">Logout</a>
                 {% else %}
-                <a href="?sort={{ sort_type }}">{{ sort_type }}</a>
+                <a class="underline black link dim pa3" href="{% url 'auth_login' %}">Sign In</a>
+                <a class="underline black link dim pa3" href="{% url 'registration_register' %}">Register</a>
                 {% endif %}
+            </div>
+            <div class="mw9 center pa4 pt5-ns ph7-l">
+                <h3 class="f2 f1-m f-headline-l measure-narrow lh-title mv0">
+                    <span class="lh-copy white pa1 tracked-tight">
+                        Freeshelf
+                    </span>
+                </h3>
+                <h4 class="f3 fw1 i">A collection of free programming ebooks</h4>
+            </div>
+        </header>
+        {% if sorted_books %}
+        <div class="mw9 center pa4 pt2-ns ph7-l athelas">
+            <div class="">
+                <h1 class="f1">Book List</h1>
+                <p>Books sorted by:
+                    {% for sort_type in valid_sorts %}
+                    {% if sort == sort_type %}
+                    <strong>{{ sort_type }}</strong>
+                    {% else %}
+                    <a href="?sort={{ sort_type }}">{{ sort_type }}</a>
+                    {% endif %}
+                    {% endfor %}
+                </p>
+            </div>
+            <ul class="list pl0">
+                {% for book in sorted_books %}
+                <li class="bt bb b--black-10">
+                    <a class="db pv4 ph3 ph0-l no-underline black bg-animate hover-bg-light-gray"
+                        href="{{ book.slug }}">
+                        <div class="flex flex-column flex-row-ns">
+                            <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
+                                <img src="{{book.image_url}}" class="db w-60 pa3">
+                            </div>
+                            <div class="w-100 w-60-ns pl2-ns">
+                                <h1>{{ book.title }}</h1>
+                                <h3>{{book.author}}</h3>
+                                <p>{{book.description}}</p>
+                                <strong>Categories: </strong>
+                                {% for type in book.category.all %}
+                                <p>{{ type }}</p>
+                                {% endfor %}
+                                <h4>Added to the shelf on: {{book.date_added}}</h4>
+                            </div>
+                        </div>
+                    </a>
+                </li>
                 {% endfor %}
-            </p>
+            </ul>
         </div>
-        <ul class="list pl0">
-            {% for book in sorted_books %}
-            <li class="bt bb b--black-10">
-                <a class="db pv4 ph3 ph0-l no-underline black bg-animate hover-bg-light-gray" href="{{ book.slug }}">
-                    <div class="flex flex-column flex-row-ns">
-                        <div class="pr3-ns mb4 mb0-ns w-100 w-40-ns">
-                            <img src="{{book.image_url}}" class="db w-60 pa3">
-                        </div>
-                        <div class="w-100 w-60-ns pl2-ns">
-                            <h1>{{ book.title }}</h1>
-                            <h3>{{book.author}}</h3>
-                            <p>{{book.description}}</p>
-                            <strong>Categories: </strong>
-                            {% for type in book.category.all %}
-                            <p>{{ type }}</p>
-                            {% endfor %}
-                            <h4>Added to the shelf on: {{book.date_added}}</h4>
-                        </div>
-                    </div>
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    </div>
-    {% else %}
-    <p>There aren't any ebooks listed yet. Check back soon!</p>
-    {% endif %}
-    {% endblock %}
+        {% else %}
+        <p>There aren't any ebooks listed yet. Check back soon!</p>
+        {% endif %}
+</body>
+
+</html>
