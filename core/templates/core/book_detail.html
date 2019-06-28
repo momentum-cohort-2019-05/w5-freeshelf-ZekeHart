@@ -12,7 +12,7 @@
         <p><strong>URL:</strong> <a href="{{ book.url }}">{{ book.url }}</a></p>
         <strong>Categories: </strong>
         {% for type in book.category.all %}
-        <p>{{ type }}</p>
+        <p><a href="/categories{{type:pk}}">{{ type }}</a></p>
         {% endfor %}
         {% if user.is_authenticated %}
         <br>
