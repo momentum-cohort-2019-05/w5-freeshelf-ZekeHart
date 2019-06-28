@@ -43,13 +43,13 @@
                             {% if sort == sort_type %}
                             <strong>{{ sort_type }}</strong>
                             {% else %}
-                            <a href="?sort={{ sort_type }}">{{ sort_type }}</a>
+                            <a class="black link dim underline" href="?sort={{ sort_type }}">{{ sort_type }}</a>
                             {% endif %}
                             {% endfor %}
                         </p>
                     </div>
                     <div class="fl w-50 tr v-base">
-                        <p><a class="black link dim" href="/categories/"><strong>Categories</strong></a></p>
+                        <p><a class="black link dim underline" href="/categories/"><strong>Categories</strong></a></p>
                     </div>
                 </div>
             </div>
