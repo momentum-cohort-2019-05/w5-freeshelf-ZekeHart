@@ -4,7 +4,7 @@
 <h1>{{ category.name }}</h1>
 {% for book in book_list %}
 <ul>
-    <a class="black" href="/all-books/{{book.slug}}">{{ book.title }}</a>
+    <a class="black link dim" href="/all-books/{{book.slug}}">{{ book.title }}</a>
 </ul>
 {% endfor %}
 {% endblock %}
