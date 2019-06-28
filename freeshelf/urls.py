@@ -21,11 +21,13 @@ from django.views.generic import RedirectView
 from core import views
 
 urlpatterns = [
-    path('', RedirectView.as_view(url='/freeshelf/')),
+    path('', RedirectView.as_view(url='/all-books/')),
     path('freeshelf/', views.freeshelf, name='freeshelf'),
     path('all-books/', views.all_books, name='all-books'),
-    path('books/', views.BookListView.as_view(), name='books'),
+    # path('books/', views.BookListView.as_view(), name='books'),
     path('admin/', admin.site.urls),
-    path('books/<slug>', views.BookDetailView.as_view(), name='book-detail'),
+    path('all-books/<slug>',
+         views.BookDetailView.as_view(),
+         name='book-detail'),
     path('accounts/', include('registration.backends.simple.urls')),
 ]
