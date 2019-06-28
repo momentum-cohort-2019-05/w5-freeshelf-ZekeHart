@@ -2,6 +2,9 @@
 
 {% block content %}
 <h1>{{ category.name }}</h1>
-
-</div>
+{% for book in book_list %}
+<ul>
+    <a class="black" href="/all-books/{{book.slug}}">{{ book.title }}</a>
+</ul>
+{% endfor %}
 {% endblock %}

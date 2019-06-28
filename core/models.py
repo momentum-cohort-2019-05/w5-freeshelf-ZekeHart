@@ -12,7 +12,7 @@ class Book(models.Model):
     description = models.TextField(verbose_name="Description of the eBook")
     slug = models.SlugField(title, max_length=50, unique=True, null=False)
     date_added = models.DateField(auto_now_add=True)
-
+    times_favorited = models.PositiveSmallIntegerField(default=0)
     image_url = models.URLField(null=True)
     category = models.ManyToManyField('Category')
 

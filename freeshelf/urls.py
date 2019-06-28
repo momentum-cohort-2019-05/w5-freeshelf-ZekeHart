@@ -32,9 +32,7 @@ urlpatterns = [
     # path('all-books/<slug>',
     #      views.BookDetailView.as_view(),
     #      name='book-detail'),
-    path('categories/<int:pk>',
-         views.CategoryDetailView.as_view(),
-         name='category-detail'),
+    path('categories/<int:pk>', views.category_detail, name='category-detail'),
     path('all-books/<slug>', views.specific_book, name='specific_book'),
     path('accounts/', include('registration.backends.simple.urls')),
 ]

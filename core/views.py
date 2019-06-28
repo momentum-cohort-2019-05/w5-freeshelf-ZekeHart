@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views import generic
 from core.models import Book, Category
+from core.forms import FavoriteToggle
 from django.contrib.auth.decorators import login_required
 
 
@@ -34,16 +35,28 @@ def favorites_list(request):
 
 def specific_book(request, slug):
     book = get_object_or_404(Book, slug=slug)
-    return render(request, 'core/specific_book.html', {'book': book})
+    form = FavoriteToggle()
+    return render(request, 'core/specific_book.html', {
+        'book': book,
+        'form': form
+    })
+
+
+def category_detail(request, pk):
+    category = get_object_or_404(Category, pk=pk)
+    book_list = Book.objects.filter(category=category)
+    return render(request, 'core/category_detail.html', {
+        'category': category,
+        'book_list': book_list
+    })
 
 
 class CategoryListView(generic.ListView):
     model = Category
 
 
-class CategoryDetailView(generic.DetailView):
-    model = Category
-
+# class CategoryDetailView(generic.DetailView):
+#     model = Category
 
 # class BookDetailView(generic.DetailView):
 #     model = Book

@@ -36,15 +36,22 @@
         <div class="mw9 center pa4 pt2-ns ph7-l athelas">
             <div class="">
                 <h1 class="f1">Book List</h1>
-                <p>Books sorted by:
-                    {% for sort_type in valid_sorts %}
-                    {% if sort == sort_type %}
-                    <strong>{{ sort_type }}</strong>
-                    {% else %}
-                    <a href="?sort={{ sort_type }}">{{ sort_type }}</a>
-                    {% endif %}
-                    {% endfor %}
-                </p>
+                <div class="flex flex-row">
+                    <div class="fl w-50  v-base">
+                        <p>Books sorted by:
+                            {% for sort_type in valid_sorts %}
+                            {% if sort == sort_type %}
+                            <strong>{{ sort_type }}</strong>
+                            {% else %}
+                            <a href="?sort={{ sort_type }}">{{ sort_type }}</a>
+                            {% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
+                    <div class="fl w-50 tr v-base">
+                        <p><a class="black" href="/categories/"><strong>Categories</strong></a></p>
+                    </div>
+                </div>
             </div>
             <ul class="list pl0">
                 {% for book in sorted_books %}
