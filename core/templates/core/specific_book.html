@@ -15,8 +15,20 @@
         <p><a class="black link dim underline" href="/categories/{{type.id}}">{{ type }}</a></p>
         {% endfor %}
         {% if user.is_authenticated %}
-        <br>
-        <button>Placeholder</button>
+        {% if book in have_favorited %}
+        <a class="f6 link dim br3 ba bw1 ph3 pv2 mb2 dib gold "
+            href="{% url 'favorite-toggle' book.slug %}?next={{ request.path }}">Unfavorite</a>
+        {% else %}
+        <a class="f6 link dim br3 ba bw1 b--gold ph3 pv2 mb2 dib bg-gold white"
+            href="{% url 'favorite-toggle' book.slug %}?next={{ request.path }}">Favorite</a>
+        {% endif %}
+        {% endif %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
         {% endif %}
     </div>
 
