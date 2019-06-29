@@ -38,7 +38,7 @@ def favorites_list(request):
 def specific_book(request, slug):
     book = get_object_or_404(Book, slug=slug)
     have_favorited = []
-    if request.user:
+    if not request.user.is_anonymous:
         for fav in UserFavorite.objects.filter(user=request.user):
             have_favorited.append(fav.fav_book)
     return render(request, 'core/specific_book.html', {
