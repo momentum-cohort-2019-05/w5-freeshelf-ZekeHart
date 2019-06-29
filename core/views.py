@@ -30,11 +30,6 @@ def all_books(request):
     })
 
 
-@login_required
-def favorites_list(request):
-    return render(request, 'favorites_list.html', {})
-
-
 def specific_book(request, slug):
     book = get_object_or_404(Book, slug=slug)
     have_favorited = []
@@ -47,6 +42,7 @@ def specific_book(request, slug):
     })
 
 
+@login_required
 def favorite_toggle(request, slug):
     book = get_object_or_404(Book, slug=slug)
     has_favorited = UserFavorite.objects.filter(user=request.user,
@@ -71,6 +67,12 @@ def category_detail(request, pk):
         'category': category,
         'book_list': book_list
     })
+
+
+@login_required
+def favorites_list(request):
+    favorites = UserFavorite.objects.filter(user=request.user)
+    return render(request, 'favorites_list.html', {'favorites': favorites})
 
 
 class CategoryListView(generic.ListView):

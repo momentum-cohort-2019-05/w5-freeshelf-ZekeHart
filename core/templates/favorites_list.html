@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Your Favorited Books</h1>
+
+
+{% if favorites %}
+{% for favorite in favorites %}
+<ul>
+    <a class="black link dim underline" href="/all-books/{{favorite.fav_book.slug}}">{{ favorite.fav_book.title }}</a>
+</ul>
+{% endfor %}
+{% endif %}
+{% endblock %}
